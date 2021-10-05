@@ -1,0 +1,10 @@
+<div class="addpost" >
+   
+    <div class="postcontainer">
+        <input type="text" value={{getTitle()}} (keyup)="onTitleChange($event)" >
+        <textarea  value={{getContent()}} (keyup)=" onContentChange($event)" name="" id="" cols="30" rows="10" ></textarea>
+    </div>
+    <div>
+        <app-button  buttonname="Add Post" (btnClick)="toggleAddPost()" ></app-button>
+    </div>
+</div>
