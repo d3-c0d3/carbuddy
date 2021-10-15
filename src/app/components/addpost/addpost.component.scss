@@ -1,0 +1,36 @@
+.postcontainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+}
+.postcontainer input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    border: none;
+    background-color: rgb(170, 170, 170);
+    border-radius: 10px;
+    height: 30px;
+
+}
+.postcontainer textarea{
+    outline: none;
+    background-color: rgb(170, 170, 170);
+    border: none;
+    border-radius: 10px;
+}
+.addpostContainer{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.addPostButton{
+    background-color: rgb(38, 197, 38);
+    width: 50%;
+    padding: 7px;
+    border-radius: 5px;
+    text-align: center;
+
+}

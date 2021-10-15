@@ -10,7 +10,11 @@ import { AddpostComponent } from './components/addpost/addpost.component';
 import { BackdropComponent } from './components/ui/backdrop/backdrop.component';
 import { ModalComponent } from './components/ui/modal/modal.component';
 import { NavbarComponent } from './components/ui/navbar/navbar.component';
-
+import { PostService } from './components/dashboard/post.service';
+import { DropdownnavComponent } from './components/ui/dropdownnav/dropdownnav.component';
+import {HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {  MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,13 +23,17 @@ import { NavbarComponent } from './components/ui/navbar/navbar.component';
     AddpostComponent,
     BackdropComponent,
     ModalComponent,
-    NavbarComponent
+    NavbarComponent,
+    DropdownnavComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [PostService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

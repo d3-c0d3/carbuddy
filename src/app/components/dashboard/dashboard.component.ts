@@ -1,35 +1,108 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/interfaces/post';
-
+import { PostService } from './post.service';
+import {MatCard} from '@angular/material/card';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  postList:Post[]=[];
-  modalController:boolean=false;
-  constructor() { 
-   // console.log(this.post)
-  }
+  public postList:Post[]=[];
+  postModalController:boolean=false;
 
-  ngOnInit(): void {
-  }
-  closeModal(value:boolean):void{
-    this.modalController=value;
-    console.log(this.modalController)
-  }
-  addPost(post:Post):void{
-    this.postList.push(post);
-    // console.log(post)
-  }
-  editPost(index:number):void{
-    //console.log(this.modalController)
-    this.modalController=true;
-    console.log(`${this.postList[index].title} editing`)
-  }
-  deletePost(index:number):void{
-    this.postList.splice(index,1);
-  }
+  editModalController:boolean=false;
+  backdropController:boolean=false;
+  editedPost:string="";
+  editedTitle:string="";
+  newPost:Post={
+      
+    title:"",
+    slug:"",
+    author:"",
+    shortDescription:"",
+    body:"",
+    image:"",
+    priority: "",
+    comment: null,
+    };
+  
 
+  constructor(private _postService:PostService) { 
+    
+  }
+  ngOnInit() {
+    console.log("init called")
+    this.fetchPost()
+  }
+  
+  /* modal and backdrop controller */
+  closeModal():void{
+   this.backdropController=false;
+   this.postModalController=false;
+   this.editModalController=false;
+  }
+  openPostModal(){
+    this.backdropController=true;
+    this.postModalController=true;
+  }
+  openEditModal(){
+    
+    this.backdropController=true;
+    this.editModalController=true;
+  }
+  /* post controller */
+  fetchPost(){
+    this._postService.getAllPosts()
+    .subscribe((data)=> { this.postList=data.data
+      console.log(data.data)}) 
+  }
+  addNewBlog(){
+    this.openPostModal()
+  }
+  postAdded(){
+    this.fetchPost()
+    this.closeModal()
+  }
+  editPost(id:any):void{
+   
+    this.openEditModal()
+    console.log(id)
+    this._postService.getPostByID(id)
+    .subscribe((data)=> { 
+      this.newPost= data.data;
+      this.editedPost=data.data.shortDescription;
+      this.editedTitle=data.data.title;
+      })
+      
+  }
+  deletePost(id:any):void{
+    this._postService.deletePostByID(id)
+    .subscribe(res=>{
+      if(res.success){ 
+      console.log(res)
+      this.fetchPost()
+        
+    }
+
+    },err=>{
+      console.log(err)
+    })
+  }
+  updatePost(title:any,content:any){
+    this.closeModal(); 
+    this.newPost.title=title.value;
+    this.newPost.shortDescription=content.value;
+    this._postService.updatePost(this.newPost)
+    .subscribe(res=>{
+      if(res.success){ 
+      console.log(res)
+      this.fetchPost()
+        
+    }
+
+    },err=>{
+      console.log(err)
+    })
+}
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit,Output,EventEmitter, Input } from '@angular/core';
 
 import { Post } from 'src/app/interfaces/post';
+import { PostService } from '../dashboard/post.service';
 @Component({
   selector: 'app-addpost',
   templateUrl: './addpost.component.html',
@@ -10,10 +11,11 @@ export class AddpostComponent implements OnInit {
 
   private title:string="";
   private content:string="";
+  private slug:string="";
   @Input () len:string="";
-  @Output() newItemEvent=new EventEmitter<Post>();
+  @Output() newItemEvent=new EventEmitter<any>();
   
-  constructor() { }
+  constructor(private _postService:PostService) { }
   //setters
   setTitle(title:string):void{
     this.title=title;
@@ -34,21 +36,47 @@ export class AddpostComponent implements OnInit {
     if(this.getContent().trim()==="" &&this.getTitle().trim()===""){
       console.log("Invalid Input")
       this.setTitle("");
+      this.slug="";
     this.setContent("");
     }
     else{ 
-      console.log(this.len);
+      
     let newPost:Post={
-      id:1,
-      title: this.getTitle(),
-      content: this.getContent()
+      
+    title:this.getTitle(),
+    slug:this.getSlug(),
+    author:"sufian",
+    shortDescription:this.getContent(),
+    body:"",
+    image:"",
+    priority: "",
+    comment: null,
     };
     //newPost.id="1"
    // console.log(newPost)
-    this.newItemEvent.emit(newPost);
+   
+   let x=this._postService.addNewPost(newPost)
+   .subscribe(res=>{
+     if(res.success){ 
+       console.log(res)
+       this.newItemEvent.emit();
+        
+    }
+
+    },err=>{
+      console.log(err)
+    })
+   
     this.setTitle("");
+    this.slug="";
     this.setContent("");
   }
+  }
+  onSlugChange(event:any){
+    this.slug=event.target.value;
+  }
+  getSlug(){
+    return this.slug
   }
   
   onTitleChange(event:any):void{

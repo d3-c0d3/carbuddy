@@ -1,10 +1,13 @@
 <div class="addpost" >
-   
+  
     <div class="postcontainer">
         <input type="text" value={{getTitle()}} (keyup)="onTitleChange($event)" >
+        <input type="text" value={{getSlug()}} (keyup)="onSlugChange($event)" >
         <textarea  value={{getContent()}} (keyup)=" onContentChange($event)" name="" id="" cols="30" rows="10" ></textarea>
     </div>
-    <div>
-        <app-button  buttonname="Add Post" (btnClick)="toggleAddPost()" ></app-button>
+    <div class="addpostContainer">
+        <app-button class="addPostButton"  buttonname="Add Post" (btnClick)="toggleAddPost()" ></app-button>
     </div>
 </div>
+
+<!-- jabo mkshiping.cpm booking.cpm -->

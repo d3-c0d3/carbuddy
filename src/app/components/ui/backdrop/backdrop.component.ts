@@ -7,14 +7,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class BackdropComponent implements OnInit {
   @Input () show:boolean=false;
-  @Output() backDropController=new EventEmitter<boolean>();
+  @Output() backDropController=new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
-  toggleBackdrop():void{
-    this.show=false;
-    this.backDropController.emit(this.show);
+  closeBackDrop():void{
+    
+    this.backDropController.emit();
     console.log("BD click")
   }
 }

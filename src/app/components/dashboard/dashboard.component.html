@@ -1,33 +1,46 @@
 <div>
-  
-  <app-backdrop [show]="modalController" (backDropController)="closeModal($event)">
-        <app-modal [show]="modalController">
-           <input type="text">
-           <textarea name="" id="" cols="30" rows="10"></textarea>
-            <app-button buttonname="Save Edit" ></app-button>
-        </app-modal>
+  <div class="editPostContainer" >
+  <app-backdrop [show]="backdropController" (backDropController)="closeModal()">
+       
     </app-backdrop>
+    <app-modal class="editInput"  [showModal]="editModalController">
+        <div class="editPost" >
+        <input #title value="{{editedTitle}}"  type="text">
+        <textarea #content name="" id="" cols="30" rows="10">{{editedPost}}</textarea>
+         <div class="editBtnContainer" >
+        <app-button buttonname="Save" (btnClick)="updatePost(title,content)"  ></app-button>
+    </div>
+    </div>
+     </app-modal>
+    </div>
     <div>
     <app-navbar></app-navbar>
     </div>
     <div class="graph-container">
+        <div  class="addpost">
+        <app-button class="addPostBtn " buttonname="Add New Blog" (btnClick)="addNewBlog()"  ></app-button>
+    </div>
         <div>
-            <app-addpost   (newItemEvent)="addPost($event)" ></app-addpost>
-            
+            <app-backdrop [show]="backdropController" (backDropController)="closeModal()"></app-backdrop>
+            <app-modal [showModal]="postModalController">
+            <app-addpost   (newItemEvent)="postAdded()" ></app-addpost>
+        </app-modal>
         </div>
-        <div>
+        <div class="postcontainer" >
+            
           <div class="post"   *ngFor="let post of postList;let indexOfelement=index" >
             <!-- ngFor index:{{indexOfelement}}  -->
-             <div> {{post.title}} </div>
-             <div> {{post.content}} </div>
-            
-             <app-button buttonname="Edit" (btnClick)="editPost(indexOfelement)" ></app-button>
-             <app-button buttonname="Delete" (btnClick)="deletePost(indexOfelement)" ></app-button>
-        </div>
+             <div class="postTitle" > {{post.title}} </div>
+             <div class="shortDesc" >{{post.shortDescription}}</div>
+            <div class="btnContainer" > 
+                <app-button class="editBtn" buttonname="Edit" (btnClick)="editPost(post._id)" ></app-button>
+                <app-button class="deleteBtn" buttonname="Delete" (btnClick)="deletePost(post._id)" ></app-button>
+            </div>
+            </div>
         </div>
     </div>
     <div>
-        <footer>footer</footer>
+        <footer></footer>
     </div>
 </div>
 
