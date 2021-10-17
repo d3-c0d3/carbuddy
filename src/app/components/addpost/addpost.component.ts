@@ -40,14 +40,16 @@ export class AddpostComponent implements OnInit {
     this.setContent("");
     }
     else{ 
-      
+      let shrtDesc:string=this.getContent();
+      shrtDesc=shrtDesc.substring(0,10);
+      shrtDesc=shrtDesc+"....";
     let newPost:Post={
       
     title:this.getTitle(),
     slug:this.getSlug(),
     author:"sufian",
-    shortDescription:this.getContent(),
-    body:"",
+    shortDescription:shrtDesc,
+    body:this.getContent(),
     image:"",
     priority: "",
     comment: null,

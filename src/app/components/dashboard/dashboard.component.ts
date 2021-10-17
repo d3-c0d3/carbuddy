@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/interfaces/post';
 import { PostService } from './post.service';
-import {MatCard} from '@angular/material/card';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     };
   
 
-  constructor(private _postService:PostService) { 
+  constructor(private _postService:PostService,private router:Router) { 
     
   }
   ngOnInit() {
@@ -104,5 +104,8 @@ export class DashboardComponent implements OnInit {
     },err=>{
       console.log(err)
     })
+}
+viewPostDetails(post:Post){
+  this.router.navigate(['/postdetails',post._id])
 }
 }

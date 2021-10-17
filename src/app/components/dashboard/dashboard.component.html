@@ -14,7 +14,7 @@
      </app-modal>
     </div>
     <div>
-    <app-navbar></app-navbar>
+
     </div>
     <div class="graph-container">
         <div  class="addpost">
@@ -30,12 +30,15 @@
             
           <div class="post"   *ngFor="let post of postList;let indexOfelement=index" >
             <!-- ngFor index:{{indexOfelement}}  -->
+            <div (click)="viewPostDetails(post)"  >
              <div class="postTitle" > {{post.title}} </div>
              <div class="shortDesc" >{{post.shortDescription}}</div>
-            <div class="btnContainer" > 
+           
+            </div>  <div class="btnContainer" > 
                 <app-button class="editBtn" buttonname="Edit" (btnClick)="editPost(post._id)" ></app-button>
                 <app-button class="deleteBtn" buttonname="Delete" (btnClick)="deletePost(post._id)" ></app-button>
             </div>
+            
             </div>
         </div>
     </div>

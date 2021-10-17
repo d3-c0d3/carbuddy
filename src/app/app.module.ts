@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
@@ -15,16 +15,19 @@ import { DropdownnavComponent } from './components/ui/dropdownnav/dropdownnav.co
 import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {  MatCardModule } from '@angular/material/card';
+import { PostdetailsComponent } from './components/postdetails/postdetails.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    
+    routingComponent,
     ButtonComponent,
     AddpostComponent,
     BackdropComponent,
     ModalComponent,
     NavbarComponent,
-    DropdownnavComponent
+    DropdownnavComponent,
+    
   ],
   imports: [
     BrowserModule,
